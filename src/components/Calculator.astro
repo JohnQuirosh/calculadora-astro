@@ -1,0 +1,150 @@
+---
+
+---
+
+<h1 class="text-gradient">Calculadora Modern</h1>
+<div class="container">
+  <div class="box">
+    <input type="text" onkeydown="handleKeyPress(event)" id="display" />
+    <div class="buttons">
+      <button onclick="appendToDisplay('1')">1</button>
+      <button onclick="appendToDisplay('2')">2</button>
+      <button onclick="appendToDisplay('3')">3</button>
+      <button onclick="appendToDisplay('+')">+</button>
+      <button onclick="appendToDisplay('4')">4</button>
+      <button onclick="appendToDisplay('5')">5</button>
+      <button onclick="appendToDisplay('6')">6</button>
+      <button onclick="appendToDisplay('-')">-</button>
+      <button onclick="appendToDisplay('7')">7</button>
+      <button onclick="appendToDisplay('8')">8</button>
+      <button onclick="appendToDisplay('9')">9</button>
+      <button onclick="appendToDisplay('*')">*</button>
+      <button class="button-delete" onclick="clearDisplay()">C</button>
+      <button onclick="appendToDisplay('0')">0</button>
+      <button class="button-value" onclick="calculateResult()">=</button>
+      <button onclick="appendToDisplay('/')">/</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  function clearDisplay() {
+    document.getElementById("display").value = "";
+  }
+
+  function appendToDisplay(value) {
+    document.getElementById("display").value += value;
+  }
+
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      calculateResult();
+      event.preventDefault();
+    }
+  }
+
+  function calculateResult() {
+    try {
+      document.getElementById("display").value = eval(
+        document.getElementById("display").value
+      );
+    } catch (error) {
+      document.getElementById("display").value = "Error";
+    }
+  }
+</script>
+
+<style>
+  .container {
+    color: white;
+    position: relative;
+    font-family: sans-serif;
+  }
+
+  .container .box {
+    width: 11.875em;
+    height: 15.875em;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.074);
+    border: 1px solid rgba(255, 255, 255, 0.222);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-radius: 0.7rem;
+    transition: all ease 0.3s;
+  }
+
+  .container .box:hover {
+    box-shadow: 0px 0px 20px 1px #ffbb763f;
+    border: 1px solid rgba(255, 255, 255, 0.454);
+  }
+
+  input,
+  button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 10px;
+    background-color: #eee;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 14px 14px 20px 0 rgba(20, 20, 20, 0.3);
+  }
+
+  input {
+    width: 12.7rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .astro-a {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 220px;
+    height: auto;
+    z-index: -1;
+  }
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .button-delete {
+    background-color: rgba(223, 4, 4, 0.651);
+    color: white;
+  }
+
+  .button-delete:hover {
+    background-color: rgba(255, 1, 1, 0.651);
+    color: white;
+  }
+
+  .button-value {
+    background-color: rgba(0, 177, 29, 0.651);
+    color: white;
+  }
+  .button-value:hover {
+    background-color: rgba(0, 231, 39, 0.651);
+    color: white;
+  }
+</style>
